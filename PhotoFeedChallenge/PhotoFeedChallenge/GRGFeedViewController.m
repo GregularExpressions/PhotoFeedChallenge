@@ -8,8 +8,9 @@
 
 #import "GRGFeedViewController.h"
 #import "GRGFeedTableViewCell.h"
+#import "GRGFeedAPIController.h"
 
-@interface GRGFeedViewController ()
+@interface GRGFeedViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic,strong) UITableView* feedTableView;
 @end
 
@@ -22,11 +23,19 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
     
     // Create the TableView we'll show the FeedItems in:
     self.feedTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+    self.feedTableView.delegate = self;
+    self.feedTableView.dataSource = self;
+    [self.view addSubview:self.feedTableView];
+    
+    GRGFeedAPIController* apiController = [[GRGFeedAPIController alloc] init];
+    [apiController downloadAndStoreFeedItemsWithCompletion:^(NSError *error, NSArray *feedItems) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
+    // TODO: Purge local image cache
 }
 
 #pragma mark - TableView

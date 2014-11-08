@@ -16,6 +16,7 @@
 		37DDC1391A0E728000864B21 /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDC1381A0E728000864B21 /* FeedItem.m */; };
 		37DDC13D1A0E73EF00864B21 /* GRGCoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDC13C1A0E73EF00864B21 /* GRGCoreDataController.m */; };
 		37DDC1401A0E752E00864B21 /* GRGFeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDC13F1A0E752E00864B21 /* GRGFeedTableViewCell.m */; };
+		37DDC1431A0E76E200864B21 /* GRGFeedAPIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDC1421A0E76E200864B21 /* GRGFeedAPIController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		37DDC13C1A0E73EF00864B21 /* GRGCoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRGCoreDataController.m; sourceTree = "<group>"; };
 		37DDC13E1A0E752E00864B21 /* GRGFeedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGFeedTableViewCell.h; sourceTree = "<group>"; };
 		37DDC13F1A0E752E00864B21 /* GRGFeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRGFeedTableViewCell.m; sourceTree = "<group>"; };
+		37DDC1411A0E76E200864B21 /* GRGFeedAPIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGFeedAPIController.h; sourceTree = "<group>"; };
+		37DDC1421A0E76E200864B21 /* GRGFeedAPIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRGFeedAPIController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +137,8 @@
 			children = (
 				37DDC13B1A0E73EF00864B21 /* GRGCoreDataController.h */,
 				37DDC13C1A0E73EF00864B21 /* GRGCoreDataController.m */,
+				37DDC1411A0E76E200864B21 /* GRGFeedAPIController.h */,
+				37DDC1421A0E76E200864B21 /* GRGFeedAPIController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 				37DDC1121A0E6E6D00864B21 /* AppDelegate.m in Sources */,
 				37DDC13D1A0E73EF00864B21 /* GRGCoreDataController.m in Sources */,
 				37DDC1391A0E728000864B21 /* FeedItem.m in Sources */,
+				37DDC1431A0E76E200864B21 /* GRGFeedAPIController.m in Sources */,
 				37DDC1151A0E6E6D00864B21 /* PhotoFeedChallenge.xcdatamodeld in Sources */,
 				37DDC1401A0E752E00864B21 /* GRGFeedTableViewCell.m in Sources */,
 				37DDC1181A0E6E6D00864B21 /* GRGFeedViewController.m in Sources */,
