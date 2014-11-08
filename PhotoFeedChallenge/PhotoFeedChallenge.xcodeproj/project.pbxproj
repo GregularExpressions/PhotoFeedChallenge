@@ -17,6 +17,7 @@
 		37DDC13D1A0E73EF00864B21 /* GRGCoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDC13C1A0E73EF00864B21 /* GRGCoreDataController.m */; };
 		37DDC1401A0E752E00864B21 /* GRGFeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDC13F1A0E752E00864B21 /* GRGFeedTableViewCell.m */; };
 		37DDC1431A0E76E200864B21 /* GRGFeedAPIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDC1421A0E76E200864B21 /* GRGFeedAPIController.m */; };
+		37DDC1451A0E7FF900864B21 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37DDC1441A0E7FF900864B21 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		37DDC13F1A0E752E00864B21 /* GRGFeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRGFeedTableViewCell.m; sourceTree = "<group>"; };
 		37DDC1411A0E76E200864B21 /* GRGFeedAPIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGFeedAPIController.h; sourceTree = "<group>"; };
 		37DDC1421A0E76E200864B21 /* GRGFeedAPIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRGFeedAPIController.m; sourceTree = "<group>"; };
+		37DDC1441A0E7FF900864B21 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37DDC1451A0E7FF900864B21 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +59,7 @@
 		37DDC1001A0E6E6D00864B21 = {
 			isa = PBXGroup;
 			children = (
+				37DDC1461A0E800700864B21 /* Frameworks */,
 				37DDC10B1A0E6E6D00864B21 /* PhotoFeedChallenge */,
 				37DDC1281A0E6E6E00864B21 /* PhotoFeedChallengeTests */,
 				37DDC10A1A0E6E6D00864B21 /* Products */,
@@ -141,6 +145,14 @@
 				37DDC1421A0E76E200864B21 /* GRGFeedAPIController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		37DDC1461A0E800700864B21 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				37DDC1441A0E7FF900864B21 /* CoreData.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -21,15 +21,40 @@ static NSString* kFeedItemAPIEndPoint = @"http://challenge.superfling.com";
         NSArray* results = [self downloadJSON];
         if (results) {
             NSLog(@"results = \n%@",results);
-        }
-        
-        if (completion) {
-            //completion(nil,results);
+            
+            NSArray* managedObjects = [self createAndReturnFeedItemsFromParsedJSON:results];
+            
+            if (completion) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // NSManagedObjects to main thread
+                    //completion(nil,results);
+                });
+            }
+            
+        } else {
+            if (completion) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(nil,nil);
+                });
+            }
         }
         
     });
 }
 
+#pragma mark - NSManagedObjects
+- (NSArray*) createAndReturnFeedItemsFromParsedJSON:(NSArray*)parsedJSON
+{
+    NSMutableArray* managedObjects = [NSMutableArray array];
+    for (NSDictionary* dict in parsedJSON) {
+        
+        
+        
+    }
+    return managedObjects;
+}
+
+#pragma mark - JSON
 - (NSArray*) downloadJSON
 {
     // Hit the endpoint for data:

@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 @interface GRGCoreDataController : NSObject
-
+@property (nonatomic, retain) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) NSPersistentStoreCoordinator *persistentStoreCoordinator;
++ (GRGCoreDataController*) sharedController;
+- (BOOL) save:(NSError**)saveError onContext:(NSManagedObjectContext*)context isBackgroundContext:(BOOL)background;
 @end
