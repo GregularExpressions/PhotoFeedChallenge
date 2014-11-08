@@ -14,6 +14,8 @@
 		37DDC11D1A0E6E6D00864B21 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37DDC11C1A0E6E6D00864B21 /* Images.xcassets */; };
 		37DDC1201A0E6E6E00864B21 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DDC11E1A0E6E6E00864B21 /* LaunchScreen.xib */; };
 		37DDC1391A0E728000864B21 /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDC1381A0E728000864B21 /* FeedItem.m */; };
+		37DDC13D1A0E73EF00864B21 /* GRGCoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDC13C1A0E73EF00864B21 /* GRGCoreDataController.m */; };
+		37DDC1401A0E752E00864B21 /* GRGFeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDC13F1A0E752E00864B21 /* GRGFeedTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,10 @@
 		37DDC12B1A0E6E6E00864B21 /* PhotoFeedChallengeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoFeedChallengeTests.m; sourceTree = "<group>"; };
 		37DDC1371A0E728000864B21 /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedItem.h; sourceTree = "<group>"; };
 		37DDC1381A0E728000864B21 /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
+		37DDC13B1A0E73EF00864B21 /* GRGCoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGCoreDataController.h; sourceTree = "<group>"; };
+		37DDC13C1A0E73EF00864B21 /* GRGCoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRGCoreDataController.m; sourceTree = "<group>"; };
+		37DDC13E1A0E752E00864B21 /* GRGFeedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGFeedTableViewCell.h; sourceTree = "<group>"; };
+		37DDC13F1A0E752E00864B21 /* GRGFeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRGFeedTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,11 +70,12 @@
 		37DDC10B1A0E6E6D00864B21 /* PhotoFeedChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				37DDC13A1A0E72D300864B21 /* Controllers */,
 				37DDC1361A0E724C00864B21 /* Core Data */,
-				37DDC1351A0E723400864B21 /* Views, ViewControllers & App Delegate */,
 				37DDC11C1A0E6E6D00864B21 /* Images.xcassets */,
 				37DDC11E1A0E6E6E00864B21 /* LaunchScreen.xib */,
 				37DDC10C1A0E6E6D00864B21 /* Supporting Files */,
+				37DDC1351A0E723400864B21 /* Views, ViewControllers & App Delegate */,
 			);
 			path = PhotoFeedChallenge;
 			sourceTree = "<group>";
@@ -104,6 +111,8 @@
 			children = (
 				37DDC1101A0E6E6D00864B21 /* AppDelegate.h */,
 				37DDC1111A0E6E6D00864B21 /* AppDelegate.m */,
+				37DDC13E1A0E752E00864B21 /* GRGFeedTableViewCell.h */,
+				37DDC13F1A0E752E00864B21 /* GRGFeedTableViewCell.m */,
 				37DDC1161A0E6E6D00864B21 /* GRGFeedViewController.h */,
 				37DDC1171A0E6E6D00864B21 /* GRGFeedViewController.m */,
 			);
@@ -118,6 +127,15 @@
 				37DDC1381A0E728000864B21 /* FeedItem.m */,
 			);
 			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		37DDC13A1A0E72D300864B21 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				37DDC13B1A0E73EF00864B21 /* GRGCoreDataController.h */,
+				37DDC13C1A0E73EF00864B21 /* GRGCoreDataController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,8 +208,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				37DDC1121A0E6E6D00864B21 /* AppDelegate.m in Sources */,
+				37DDC13D1A0E73EF00864B21 /* GRGCoreDataController.m in Sources */,
 				37DDC1391A0E728000864B21 /* FeedItem.m in Sources */,
 				37DDC1151A0E6E6D00864B21 /* PhotoFeedChallenge.xcdatamodeld in Sources */,
+				37DDC1401A0E752E00864B21 /* GRGFeedTableViewCell.m in Sources */,
 				37DDC1181A0E6E6D00864B21 /* GRGFeedViewController.m in Sources */,
 				37DDC10F1A0E6E6D00864B21 /* main.m in Sources */,
 			);
