@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+static CGFloat kFeedTableViewCellHeight = 140.0f;
 @interface GRGFeedTableViewCell : UITableViewCell
-
+- (void) setTitleText:(NSString*)newText;
+- (void) setPhotoImage:(UIImage*)newPhotoImage;
 @end
