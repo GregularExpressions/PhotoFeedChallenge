@@ -24,7 +24,33 @@
     return sharedController;
 }
 
-#pragma mark - Core Data Boilerplate
+#pragma mark - FeedItem
+- (FeedItem*) getNewFeedItemOnManagedObjectContext:(NSManagedObjectContext*)context
+{
+    FeedItem* newFeedItem = [NSEntityDescription insertNewObjectForEntityForName:@"FeedItem" inManagedObjectContext:context];
+    return newFeedItem;
+}
+
+#pragma mark - Core Data
+- (NSManagedObjectContext*) getNewBackgroundManagedObjectContext
+{
+    NSManagedObjectContext* newContext;
+    newContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [newContext setParentContext:self.managedObjectContext];
+    [newContext setUndoManager:nil];
+    return newContext;
+}
+
+- (NSArray*) moveManagedObjects:(NSArray*)managedObjects toContext:(NSManagedObjectContext*)newContext
+{
+    NSMutableArray* movedManagedObjects = [NSMutableArray array];
+    for (NSManagedObject* managedObject in managedObjects) {
+        NSManagedObject* newManagedObject = [newContext objectWithID:managedObject.objectID];
+        [movedManagedObjects addObject:newManagedObject];
+    }
+    return movedManagedObjects;
+}
+
 - (NSManagedObjectContext*) managedObjectContext
 {
 

@@ -7,6 +7,7 @@
 //
 
 #import "GRGFeedAPIController.h"
+#import "GRGCoreDataController.h"
 
 static NSString* kFeedItemAPIEndPoint = @"http://challenge.superfling.com";
 
@@ -15,19 +16,23 @@ static NSString* kFeedItemAPIEndPoint = @"http://challenge.superfling.com";
 {
     // On cold launch the user will be waiting for this, so it's high priority.
     // Given the simplicity of the download we can avoid anything more complex
-    // like a dedicated dispatch queue or NSOperation
+    // like a dedicated dispatch queue or NSOperationQueue
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         
         NSArray* results = [self downloadJSON];
         if (results) {
             NSLog(@"results = \n%@",results);
             
-            NSArray* managedObjects = [self createAndReturnFeedItemsFromParsedJSON:results];
+            NSManagedObjectContext* backgroundContext = [[GRGCoreDataController sharedController] getNewBackgroundManagedObjectContext];
+            __block NSArray* managedObjects = [self createAndReturnFeedItemsFromParsedJSON:results onContext:backgroundContext];
+            // TODO: Handle Core Data save errors:
+            [[GRGCoreDataController sharedController] save:nil onContext:backgroundContext isBackgroundContext:YES];
             
             if (completion) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    // NSManagedObjects to main thread
-                    //completion(nil,results);
+                    NSManagedObjectContext* mainThreadContext = [[GRGCoreDataController sharedController] managedObjectContext];
+                    managedObjects = [[GRGCoreDataController sharedController] moveManagedObjects:managedObjects toContext:mainThreadContext];
+                    completion(nil,managedObjects);
                 });
             }
             
@@ -43,13 +48,17 @@ static NSString* kFeedItemAPIEndPoint = @"http://challenge.superfling.com";
 }
 
 #pragma mark - NSManagedObjects
-- (NSArray*) createAndReturnFeedItemsFromParsedJSON:(NSArray*)parsedJSON
+- (NSArray*) createAndReturnFeedItemsFromParsedJSON:(NSArray*)parsedJSON onContext:(NSManagedObjectContext*)context
 {
     NSMutableArray* managedObjects = [NSMutableArray array];
     for (NSDictionary* dict in parsedJSON) {
-        
-        
-        
+        FeedItem* newFeedItem = [[GRGCoreDataController sharedController] getNewFeedItemOnManagedObjectContext:context];
+        dict[@"ID"] ? newFeedItem.feedID = dict[@"ID"] : nil;
+        dict[@"ImageID"] ? newFeedItem.imageID = dict[@"ImageID"] : nil;
+        dict[@"Title"] ? newFeedItem.title = dict[@"Title"] : nil;
+        dict[@"UserID"] ? newFeedItem.userID = dict[@"UserID"] : nil;
+        dict[@"UserName"] ? newFeedItem.userName = dict[@"UserName"] : nil;
+        [managedObjects addObject:newFeedItem];
     }
     return managedObjects;
 }
