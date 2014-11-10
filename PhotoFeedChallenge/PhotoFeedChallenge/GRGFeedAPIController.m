@@ -10,6 +10,7 @@
 #import "GRGCoreDataController.h"
 
 static NSString* kFeedItemAPIEndPoint = @"http://challenge.superfling.com";
+static NSString* kFeedPhotoAPIEndPoint = @"http://challenge.superfling.com/photos/";
 
 @implementation GRGFeedAPIController
 - (void) downloadAndStoreFeedItemsWithCompletion:(void (^)(NSError* error, NSArray* feedItems))completion
@@ -55,6 +56,7 @@ static NSString* kFeedItemAPIEndPoint = @"http://challenge.superfling.com";
         FeedItem* newFeedItem = [[GRGCoreDataController sharedController] getNewFeedItemOnManagedObjectContext:context];
         dict[@"ID"] ? newFeedItem.feedID = dict[@"ID"] : nil;
         dict[@"ImageID"] ? newFeedItem.imageID = dict[@"ImageID"] : nil;
+        dict[@"ImageID"] ? newFeedItem.imageURL = [NSString stringWithFormat:@"%@%@",kFeedPhotoAPIEndPoint,dict[@"ImageID"]] : nil;
         dict[@"Title"] ? newFeedItem.title = dict[@"Title"] : nil;
         dict[@"UserID"] ? newFeedItem.userID = dict[@"UserID"] : nil;
         dict[@"UserName"] ? newFeedItem.userName = dict[@"UserName"] : nil;
