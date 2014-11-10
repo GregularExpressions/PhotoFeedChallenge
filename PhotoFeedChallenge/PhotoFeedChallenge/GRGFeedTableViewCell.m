@@ -15,19 +15,19 @@
 
 @implementation GRGFeedTableViewCell
 
-- (instancetype)init
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super init];
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView setBackgroundColor:[UIColor whiteColor]];
         
-        self.photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, self.frame.size.width, 100.0f)];
+        self.photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20.0f, self.contentView.frame.size.width, 120.0f)];
         [self.photoImageView setBackgroundColor:[UIColor colorWithWhite:0.8 alpha:1.0]];
         [self.photoImageView setOpaque:YES];
         [self.photoImageView setContentMode:UIViewContentModeScaleAspectFill];
         [self.contentView addSubview:self.photoImageView];
         
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 30.0f)];
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 20.0f)];
         [self.titleLabel setBackgroundColor:self.contentView.backgroundColor];
         [self.titleLabel setOpaque:YES];
         [self.titleLabel setTextColor:[UIColor blackColor]];

@@ -22,7 +22,7 @@ static NSString* kFeedPhotoAPIEndPoint = @"http://challenge.superfling.com/photo
         
         NSArray* results = [self downloadJSON];
         if (results) {
-            NSLog(@"results = \n%@",results);
+            //NSLog(@"results = \n%@",results);
             
             NSManagedObjectContext* backgroundContext = [[GRGCoreDataController sharedController] getNewBackgroundManagedObjectContext];
             __block NSArray* managedObjects = [self createAndReturnFeedItemsFromParsedJSON:results onContext:backgroundContext];
