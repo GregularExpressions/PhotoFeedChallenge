@@ -9,11 +9,13 @@
 #import "GRGFeedViewController.h"
 #import "GRGFeedTableViewCell.h"
 #import "GRGFeedAPIController.h"
+#import "GRGFeedImageController.h"
 #import "FeedItem.h"
 
 @interface GRGFeedViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic,strong) UITableView* feedTableView;
 @property (nonatomic,strong) NSArray* tableFeedItems;
+@property (nonatomic,strong) GRGFeedImageController* imageController;
 @end
 
 static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
@@ -22,6 +24,8 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.imageController = [[GRGFeedImageController alloc] init];
     
     // Create the TableView we'll show the FeedItems in:
     self.feedTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
@@ -66,7 +70,21 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
     GRGFeedTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kFeedCellReuseIdentifier forIndexPath:indexPath];
     FeedItem* feedItem = self.tableFeedItems[indexPath.row];
     [cell setTitleText:feedItem.title];
+    
+    [self.imageController getImageWithID:feedItem.imageID atURL:feedItem.imageURL forIndexPath:indexPath withCompletion:^(NSError *error, UIImage *image) {
+        if (!error) {
+            if ([tableView.indexPathsForVisibleRows containsObject:indexPath]) {
+                [cell setPhotoImage:image];
+            }
+        }
+    }];
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.imageController cancelOperationForIndexPath:indexPath];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

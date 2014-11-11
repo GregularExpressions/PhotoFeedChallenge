@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37187DD11A1293D800B02AE9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37187DD01A1293D800B02AE9 /* UIKit.framework */; };
+		37187DD61A12983F00B02AE9 /* GRGFeedImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 37187DD51A12983F00B02AE9 /* GRGFeedImageOperation.m */; };
+		375376851A11741E00D1CDF1 /* GRGFeedImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375376841A11741E00D1CDF1 /* GRGFeedImageController.m */; };
 		37DDC10F1A0E6E6D00864B21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDC10E1A0E6E6D00864B21 /* main.m */; };
 		37DDC1121A0E6E6D00864B21 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDC1111A0E6E6D00864B21 /* AppDelegate.m */; };
 		37DDC1151A0E6E6D00864B21 /* PhotoFeedChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37DDC1131A0E6E6D00864B21 /* PhotoFeedChallenge.xcdatamodeld */; };
@@ -21,6 +24,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37187DD01A1293D800B02AE9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		37187DD21A12941A00B02AE9 /* PhotoFeedChallenge-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PhotoFeedChallenge-Prefix.pch"; sourceTree = "<group>"; };
+		37187DD41A12983F00B02AE9 /* GRGFeedImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGFeedImageOperation.h; sourceTree = "<group>"; };
+		37187DD51A12983F00B02AE9 /* GRGFeedImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRGFeedImageOperation.m; sourceTree = "<group>"; };
+		375376831A11741E00D1CDF1 /* GRGFeedImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGFeedImageController.h; sourceTree = "<group>"; };
+		375376841A11741E00D1CDF1 /* GRGFeedImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRGFeedImageController.m; sourceTree = "<group>"; };
 		37DDC1091A0E6E6D00864B21 /* PhotoFeedChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoFeedChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37DDC10D1A0E6E6D00864B21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37DDC10E1A0E6E6D00864B21 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -49,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37187DD11A1293D800B02AE9 /* UIKit.framework in Frameworks */,
 				37DDC1451A0E7FF900864B21 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,6 +66,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37187DD31A12954900B02AE9 /* FeedImageController */ = {
+			isa = PBXGroup;
+			children = (
+				375376831A11741E00D1CDF1 /* GRGFeedImageController.h */,
+				375376841A11741E00D1CDF1 /* GRGFeedImageController.m */,
+				37187DD41A12983F00B02AE9 /* GRGFeedImageOperation.h */,
+				37187DD51A12983F00B02AE9 /* GRGFeedImageOperation.m */,
+			);
+			name = FeedImageController;
+			sourceTree = "<group>";
+		};
 		37DDC1001A0E6E6D00864B21 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +111,7 @@
 		37DDC10C1A0E6E6D00864B21 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				37187DD21A12941A00B02AE9 /* PhotoFeedChallenge-Prefix.pch */,
 				37DDC10D1A0E6E6D00864B21 /* Info.plist */,
 				37DDC10E1A0E6E6D00864B21 /* main.m */,
 			);
@@ -139,6 +161,7 @@
 		37DDC13A1A0E72D300864B21 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				37187DD31A12954900B02AE9 /* FeedImageController */,
 				37DDC13B1A0E73EF00864B21 /* GRGCoreDataController.h */,
 				37DDC13C1A0E73EF00864B21 /* GRGCoreDataController.m */,
 				37DDC1411A0E76E200864B21 /* GRGFeedAPIController.h */,
@@ -150,6 +173,7 @@
 		37DDC1461A0E800700864B21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37187DD01A1293D800B02AE9 /* UIKit.framework */,
 				37DDC1441A0E7FF900864B21 /* CoreData.framework */,
 			);
 			name = Frameworks;
@@ -228,6 +252,8 @@
 				37DDC13D1A0E73EF00864B21 /* GRGCoreDataController.m in Sources */,
 				37DDC1391A0E728000864B21 /* FeedItem.m in Sources */,
 				37DDC1431A0E76E200864B21 /* GRGFeedAPIController.m in Sources */,
+				37187DD61A12983F00B02AE9 /* GRGFeedImageOperation.m in Sources */,
+				375376851A11741E00D1CDF1 /* GRGFeedImageController.m in Sources */,
 				37DDC1151A0E6E6D00864B21 /* PhotoFeedChallenge.xcdatamodeld in Sources */,
 				37DDC1401A0E752E00864B21 /* GRGFeedTableViewCell.m in Sources */,
 				37DDC1181A0E6E6D00864B21 /* GRGFeedViewController.m in Sources */,
@@ -329,6 +355,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PhotoFeedChallenge/PhotoFeedChallenge-Prefix.pch";
 				INFOPLIST_FILE = PhotoFeedChallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -339,6 +367,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PhotoFeedChallenge/PhotoFeedChallenge-Prefix.pch";
 				INFOPLIST_FILE = PhotoFeedChallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -364,6 +394,7 @@
 				37DDC1311A0E6E6E00864B21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

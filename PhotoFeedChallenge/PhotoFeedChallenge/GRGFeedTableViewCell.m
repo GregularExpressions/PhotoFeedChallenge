@@ -25,6 +25,7 @@
         [self.photoImageView setBackgroundColor:[UIColor colorWithWhite:0.8 alpha:1.0]];
         [self.photoImageView setOpaque:YES];
         [self.photoImageView setContentMode:UIViewContentModeScaleAspectFill];
+        [self.photoImageView setClipsToBounds:YES];
         [self.contentView addSubview:self.photoImageView];
         
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 20.0f)];
