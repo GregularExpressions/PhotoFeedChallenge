@@ -63,13 +63,13 @@
     }
 }
 
-+(UIImage*)imageWithImage: (UIImage*) sourceImage scaledToWidth: (float) i_width
++(UIImage*)imageWithImage: (UIImage*)sourceImage scaledToWidth:(float) imageWidth
 {
     float oldWidth = sourceImage.size.width;
-    float scaleFactor = i_width / oldWidth;
+    float scaleFactor = imageWidth / oldWidth;
     
-    float newHeight = sourceImage.size.height * scaleFactor;
-    float newWidth = oldWidth * scaleFactor;
+    float newHeight = (sourceImage.size.height * scaleFactor) * [UIScreen mainScreen].scale;
+    float newWidth = (oldWidth * scaleFactor) * [UIScreen mainScreen].scale;
     
     UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
     [sourceImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
