@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		37187DD11A1293D800B02AE9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37187DD01A1293D800B02AE9 /* UIKit.framework */; };
 		37187DD61A12983F00B02AE9 /* GRGFeedImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 37187DD51A12983F00B02AE9 /* GRGFeedImageOperation.m */; };
+		37187DD91A12A34000B02AE9 /* GRGFeedImageCacheController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37187DD81A12A34000B02AE9 /* GRGFeedImageCacheController.m */; };
 		375376851A11741E00D1CDF1 /* GRGFeedImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375376841A11741E00D1CDF1 /* GRGFeedImageController.m */; };
 		37DDC10F1A0E6E6D00864B21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDC10E1A0E6E6D00864B21 /* main.m */; };
 		37DDC1121A0E6E6D00864B21 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDC1111A0E6E6D00864B21 /* AppDelegate.m */; };
@@ -28,6 +29,8 @@
 		37187DD21A12941A00B02AE9 /* PhotoFeedChallenge-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PhotoFeedChallenge-Prefix.pch"; sourceTree = "<group>"; };
 		37187DD41A12983F00B02AE9 /* GRGFeedImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGFeedImageOperation.h; sourceTree = "<group>"; };
 		37187DD51A12983F00B02AE9 /* GRGFeedImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRGFeedImageOperation.m; sourceTree = "<group>"; };
+		37187DD71A12A34000B02AE9 /* GRGFeedImageCacheController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGFeedImageCacheController.h; sourceTree = "<group>"; };
+		37187DD81A12A34000B02AE9 /* GRGFeedImageCacheController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRGFeedImageCacheController.m; sourceTree = "<group>"; };
 		375376831A11741E00D1CDF1 /* GRGFeedImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGFeedImageController.h; sourceTree = "<group>"; };
 		375376841A11741E00D1CDF1 /* GRGFeedImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRGFeedImageController.m; sourceTree = "<group>"; };
 		37DDC1091A0E6E6D00864B21 /* PhotoFeedChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoFeedChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +76,8 @@
 				375376841A11741E00D1CDF1 /* GRGFeedImageController.m */,
 				37187DD41A12983F00B02AE9 /* GRGFeedImageOperation.h */,
 				37187DD51A12983F00B02AE9 /* GRGFeedImageOperation.m */,
+				37187DD71A12A34000B02AE9 /* GRGFeedImageCacheController.h */,
+				37187DD81A12A34000B02AE9 /* GRGFeedImageCacheController.m */,
 			);
 			name = FeedImageController;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 				37DDC1391A0E728000864B21 /* FeedItem.m in Sources */,
 				37DDC1431A0E76E200864B21 /* GRGFeedAPIController.m in Sources */,
 				37187DD61A12983F00B02AE9 /* GRGFeedImageOperation.m in Sources */,
+				37187DD91A12A34000B02AE9 /* GRGFeedImageCacheController.m in Sources */,
 				375376851A11741E00D1CDF1 /* GRGFeedImageController.m in Sources */,
 				37DDC1151A0E6E6D00864B21 /* PhotoFeedChallenge.xcdatamodeld in Sources */,
 				37DDC1401A0E752E00864B21 /* GRGFeedTableViewCell.m in Sources */,

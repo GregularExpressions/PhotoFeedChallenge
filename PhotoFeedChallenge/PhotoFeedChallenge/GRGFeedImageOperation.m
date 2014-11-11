@@ -7,6 +7,7 @@
 //
 
 #import "GRGFeedImageOperation.h"
+#import "GRGFeedImageCacheController.h"
 @interface GRGFeedImageOperation()
 
 @end
@@ -29,25 +30,34 @@
 - (void) main {
     @autoreleasepool {
         
-        // TODO: check the cache
-        
-        // Download the big image:
-        NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:self.imageURL]];
-        if (imageData) {
-            UIImage* image = [UIImage imageWithData: imageData];
-            image = [GRGFeedImageOperation imageWithImage:image scaledToWidth:[[UIScreen mainScreen] bounds].size.width];
-            // TODO: Cache image
+        // Check the cache
+        GRGFeedImageCacheController* cache = [GRGFeedImageCacheController sharedController];
+        UIImage* cachedImage = [cache getImageFromCacheForImageID:self.imageID];
+        if (cachedImage) {
             if (self.storedCompletion) {
                 dispatch_async (dispatch_get_main_queue(), ^{
-                    self.storedCompletion(nil,image);
+                    self.storedCompletion(nil,cachedImage);
                 });
             }
         } else {
-            if (self.storedCompletion) {
-                NSError* error = [NSError errorWithDomain:@"Failed to download image" code:0 userInfo:@{@"url":self.imageURL}];
-                dispatch_async (dispatch_get_main_queue(), ^{
-                    self.storedCompletion(error,nil);
-                });
+            // Download the big image, resize and cache it:
+            NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:self.imageURL]];
+            if (imageData) {
+                UIImage* image = [UIImage imageWithData: imageData];
+                image = [GRGFeedImageOperation imageWithImage:image scaledToWidth:[[UIScreen mainScreen] bounds].size.width];
+                [cache addImage:image toCacheForImageID:self.imageID];
+                if (self.storedCompletion) {
+                    dispatch_async (dispatch_get_main_queue(), ^{
+                        self.storedCompletion(nil,image);
+                    });
+                }
+            } else {
+                if (self.storedCompletion) {
+                    NSError* error = [NSError errorWithDomain:@"Failed to download image" code:0 userInfo:@{@"url":self.imageURL}];
+                    dispatch_async (dispatch_get_main_queue(), ^{
+                        self.storedCompletion(error,nil);
+                    });
+                }
             }
         }
     }
