@@ -70,6 +70,7 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GRGFeedTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kFeedCellReuseIdentifier forIndexPath:indexPath];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     FeedItem* feedItem = self.tableFeedItems[indexPath.row];
     [cell setTitleText:feedItem.title];
         
@@ -91,8 +92,9 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: Image animation
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    GRGFeedTableViewCell* cell = (GRGFeedTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+    [cell performTapAnimation];
 }
 
 #pragma mark - UINavigationBar Retreat
