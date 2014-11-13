@@ -29,7 +29,8 @@
         [self.contentView addSubview:self.photoImageView];
         
         CGFloat textInset = 2.0f;
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(textInset, 0, [[UIScreen mainScreen] bounds].size.width-textInset, 20.0f)];
+        CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(textInset, 0, screenWidth-textInset, 20.0f)];
         [self.titleLabel setBackgroundColor:self.contentView.backgroundColor];
         [self.titleLabel setOpaque:YES];
         [self.titleLabel setNumberOfLines:0];

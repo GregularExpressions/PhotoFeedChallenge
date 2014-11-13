@@ -16,5 +16,5 @@
                   atURL:(NSString*)url
            forIndexPath:(NSIndexPath*)indexPath
          withCompletion:(void (^)(NSError* error, UIImage* image))completion;
-- (void) cancelOperationForIndexPath:(NSIndexPath*)indexPath;
+- (void) cancelImageForIndexPath:(NSIndexPath*)indexPath;
 @end

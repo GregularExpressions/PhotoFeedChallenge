@@ -50,7 +50,6 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // TODO: Purge local image cache
 }
 
 #pragma mark - TableView
@@ -70,7 +69,7 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
     GRGFeedTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kFeedCellReuseIdentifier forIndexPath:indexPath];
     FeedItem* feedItem = self.tableFeedItems[indexPath.row];
     [cell setTitleText:feedItem.title];
-    
+        
     [self.imageController getImageWithID:feedItem.imageID atURL:feedItem.imageURL forIndexPath:indexPath withCompletion:^(NSError *error, UIImage *image) {
         if (!error) {
             if ([tableView.indexPathsForVisibleRows containsObject:indexPath]) {
@@ -84,7 +83,7 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.imageController cancelOperationForIndexPath:indexPath];
+    [self.imageController cancelImageForIndexPath:indexPath];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
