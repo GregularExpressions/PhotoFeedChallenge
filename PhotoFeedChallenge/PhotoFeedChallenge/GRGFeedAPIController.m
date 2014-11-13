@@ -20,31 +20,42 @@ static NSString* kFeedPhotoAPIEndPoint = @"http://challenge.superfling.com/photo
     // like a dedicated dispatch queue or NSOperationQueue
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         
-        NSArray* results = [self downloadJSON];
-        if (results) {
-            //NSLog(@"results = \n%@",results);
-            
-            NSManagedObjectContext* backgroundContext = [[GRGCoreDataController sharedController] getNewBackgroundManagedObjectContext];
-            __block NSArray* managedObjects = [self createAndReturnFeedItemsFromParsedJSON:results onContext:backgroundContext];
-            // TODO: Handle Core Data save errors:
-            [[GRGCoreDataController sharedController] save:nil onContext:backgroundContext isBackgroundContext:YES];
-            
-            if (completion) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSManagedObjectContext* mainThreadContext = [[GRGCoreDataController sharedController] managedObjectContext];
-                    managedObjects = [[GRGCoreDataController sharedController] moveManagedObjects:managedObjects toContext:mainThreadContext];
-                    completion(nil,managedObjects);
-                });
-            }
-            
+        NSManagedObjectContext* backgroundContext = [[GRGCoreDataController sharedController] getNewBackgroundManagedObjectContext];
+        __block NSArray* managedObjects = [[GRGCoreDataController sharedController] getAllFeedItemsOnManagedObjectContext:backgroundContext];
+        
+        if (managedObjects && managedObjects.count > 0) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSManagedObjectContext* mainThreadContext = [[GRGCoreDataController sharedController] managedObjectContext];
+                managedObjects = [[GRGCoreDataController sharedController] moveManagedObjects:managedObjects toContext:mainThreadContext];
+                completion(nil,managedObjects);
+            });
         } else {
-            if (completion) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    completion(nil,nil);
-                });
+            // We don't have the data already, download:
+            NSArray* results = [self downloadJSON];
+            
+            if (results) {
+                
+                NSManagedObjectContext* backgroundContext = [[GRGCoreDataController sharedController] getNewBackgroundManagedObjectContext];
+                __block NSArray* managedObjects = [self createAndReturnFeedItemsFromParsedJSON:results onContext:backgroundContext];
+                // TODO: Handle Core Data save errors:
+                [[GRGCoreDataController sharedController] save:nil onContext:backgroundContext isBackgroundContext:YES];
+                
+                if (completion) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        NSManagedObjectContext* mainThreadContext = [[GRGCoreDataController sharedController] managedObjectContext];
+                        managedObjects = [[GRGCoreDataController sharedController] moveManagedObjects:managedObjects toContext:mainThreadContext];
+                        completion(nil,managedObjects);
+                    });
+                }
+                
+            } else {
+                if (completion) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion(nil,nil);
+                    });
+                }
             }
         }
-        
     });
 }
 

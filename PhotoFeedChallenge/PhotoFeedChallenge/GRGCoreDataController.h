@@ -30,6 +30,7 @@
 - (BOOL) save:(NSError**)saveError onContext:(NSManagedObjectContext*)context isBackgroundContext:(BOOL)background;
 #pragma mark - ManagedObjects:
 - (FeedItem*) getNewFeedItemOnManagedObjectContext:(NSManagedObjectContext*)context;
+- (NSArray*) getAllFeedItemsOnManagedObjectContext:(NSManagedObjectContext*)context;
 - (FeedImageItem*) getNewFeedImageItemOnManagedObjectContext:(NSManagedObjectContext*)context;
 - (NSArray*) getAllFeedImageItemsOnManagedObjectContext:(NSManagedObjectContext*)context;
 @end

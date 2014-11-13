@@ -31,6 +31,24 @@
     return newFeedItem;
 }
 
+- (NSArray*) getAllFeedItemsOnManagedObjectContext:(NSManagedObjectContext*)context
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"FeedItem"
+                                              inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"feedID" ascending:YES]]];
+    
+    NSError* fetchError;
+    NSArray *array = [context executeFetchRequest:fetchRequest error:&fetchError];
+    if (fetchError) {
+        NSLog(@"%s : %@",__PRETTY_FUNCTION__,fetchError);
+    }
+    
+    return array;
+}
+
 #pragma mark - FeedImageItem
 - (FeedImageItem*) getNewFeedImageItemOnManagedObjectContext:(NSManagedObjectContext*)context
 {
