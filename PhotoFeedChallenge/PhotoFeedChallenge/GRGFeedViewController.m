@@ -17,6 +17,7 @@
 @property (nonatomic,strong) NSArray* tableFeedItems;
 @property (nonatomic,strong) GRGFeedImageController* imageController;
 @property (nonatomic) CGFloat previousScrollViewYOffset;
+@property (nonatomic,strong) NSDate* statsLastTriggeredDate;
 @end
 
 static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
@@ -120,6 +121,28 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
     [self.navigationController.navigationBar setFrame:frame];
     [self updateBarAlpha:(1 - framePercentageHidden)];
     self.previousScrollViewYOffset = scrollOffset;
+    
+    [self checkIfTableBottom:scrollView];
+}
+
+- (void) checkIfTableBottom:(UIScrollView*)scrollView
+{
+    CGFloat height = scrollView.frame.size.height;
+    CGFloat contentYoffset = scrollView.contentOffset.y;
+    CGFloat distanceFromBottom = scrollView.contentSize.height - contentYoffset;
+
+    if(distanceFromBottom <= height && self.tableFeedItems.count > 0)
+    {
+        
+        if (!self.statsLastTriggeredDate) {
+            self.statsLastTriggeredDate = [NSDate dateWithTimeIntervalSince1970:0];
+        }
+        
+        if ([[NSDate date] timeIntervalSinceDate:self.statsLastTriggeredDate] > 5) {
+            self.statsLastTriggeredDate = [NSDate date];
+            [GRGFeedAPIController calculateAndOutputStats];
+        }
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView

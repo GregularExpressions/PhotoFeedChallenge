@@ -16,4 +16,5 @@
  *  The block that will be called on the Main Thread once the operations are complete
 */
 - (void) downloadAndStoreFeedItemsWithCompletion:(void (^)(NSError* error, NSArray* feedItems))completion;
++ (void) calculateAndOutputStats;
 @end

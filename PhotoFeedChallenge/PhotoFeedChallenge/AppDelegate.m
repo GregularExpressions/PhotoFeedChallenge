@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "GRGFeedViewController.h"
+#import "GRGCoreDataController.h"
 
 @interface AppDelegate ()
 @property (nonatomic,strong) GRGFeedViewController* feedViewController;

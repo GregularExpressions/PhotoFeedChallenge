@@ -107,4 +107,62 @@ static NSString* kFeedPhotoAPIEndPoint = @"http://challenge.superfling.com/photo
     
     return result;
 }
+
+#pragma mark - Stats
+
++ (void) calculateAndOutputStats
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSManagedObjectContext* backgroundContext = [[GRGCoreDataController sharedController] getNewBackgroundManagedObjectContext];
+        NSArray* feedImageItems = [[GRGCoreDataController sharedController] getAllFeedImageItemsOnManagedObjectContext:backgroundContext];
+        NSMutableDictionary* statsDictionary = [NSMutableDictionary dictionary];
+        NSMutableDictionary* userToImageSizesDictionary = [NSMutableDictionary dictionary];
+        for (FeedImageItem* imageItem in feedImageItems) {
+            
+            // Collect all the sizes per user in their own dictionary -> array structure:
+            NSMutableArray* userToImageSlice = userToImageSizesDictionary[imageItem.username];
+            if (!userToImageSlice) {
+                userToImageSlice = [NSMutableArray array];
+            }
+            [userToImageSlice addObject:imageItem.imageFileSize];
+            [userToImageSizesDictionary setObject:userToImageSlice forKey:imageItem.username];
+            
+            NSMutableDictionary* statsSlice = statsDictionary[imageItem.username];
+            if (!statsSlice) {
+                statsSlice = [NSMutableDictionary dictionary];
+                //[statsSlice setObject:imageItem.username forKey:@"username"];
+                [statsSlice setObject:@(0) forKey:@"greatestPhotoWidth"];
+                [statsSlice setObject:@(0) forKey:@"totalPosts"];
+            }
+            
+            NSInteger currentPostsCounts = [statsSlice[@"totalPosts"] integerValue];
+            [statsSlice setObject:@(currentPostsCounts+1) forKey:@"totalPosts"];
+            
+            if ([statsSlice[@"greatestPhotoWidth"]floatValue] < imageItem.imageWidth.floatValue) {
+                [statsSlice setObject:imageItem.imageWidth forKey:@"greatestPhotoWidth"];
+            }
+            
+            [statsDictionary setObject:statsSlice forKey:imageItem.username];
+        }
+        
+        [userToImageSizesDictionary enumerateKeysAndObjectsUsingBlock:^(NSString* username, NSArray* imageSizes, BOOL *stop) {
+            
+            float averageImageSize = 0;
+            __block float combinedImageSizes = 0;
+            for (NSNumber* imageSizeNumber in imageSizes) {
+                combinedImageSizes += imageSizeNumber.floatValue;
+            }
+            averageImageSize = round(combinedImageSizes/imageSizes.count);
+            
+            NSMutableDictionary* statsDictionarySlice = statsDictionary[username];
+            [statsDictionarySlice setObject:@(averageImageSize) forKey:@"averageImageSize"];
+            
+        }];
+        
+        
+        NSLog(@"statsDictionary = %@",statsDictionary);
+    });
+    
+}
+
 @end
