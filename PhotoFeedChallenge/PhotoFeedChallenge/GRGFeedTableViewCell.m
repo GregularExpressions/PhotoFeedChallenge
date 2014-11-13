@@ -62,6 +62,7 @@
     [self.photoImageView setImage:nil];
     [self.photoImageView setAlpha:0];
     [self.photoImageView setFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, kFeedTableViewCellHeight)];
+    [self.photoImageView.layer removeAllAnimations];
 }
 
 - (void) setTitleText:(NSString*)newText
@@ -103,7 +104,6 @@
                 self.photoImageView.transform = CGAffineTransformMakeScale(1, 1);
             }];
         }];
-        
     }
 }
 
