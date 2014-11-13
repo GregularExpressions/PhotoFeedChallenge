@@ -25,16 +25,15 @@
     return self;
 }
 
-- (void) getImageWithID:(NSNumber*)imageID
-                  atURL:(NSString*)url
-           forIndexPath:(NSIndexPath*)indexPath
-         withCompletion:(void (^)(NSError* error, UIImage* image, BOOL fromCache))completion
+- (void) getImageFromFeedItem:(FeedItem*)feedItem
+                 forIndexPath:(NSIndexPath*)indexPath
+               withCompletion:(void (^)(NSError* error, UIImage* image, BOOL fromCache))completion
 {
     dispatch_async(self.imageQueue, ^{
         
         // Return it from the cache if we've got it:
         GRGFeedImageCacheController* cache = [GRGFeedImageCacheController sharedController];
-        UIImage* cachedImage = [cache getImageFromCacheForImageID:imageID];
+        UIImage* cachedImage = [cache getImageFromCacheForImageID:feedItem.imageID];
         if (cachedImage) {
             if (completion) {
                 dispatch_async (dispatch_get_main_queue(), ^{
@@ -44,7 +43,7 @@
         } else {
             // Download, resize, return and store it in the cache:
             NSURLSession *session = [NSURLSession sharedSession];
-            NSURLSessionDataTask* dataTask = [session dataTaskWithURL:[NSURL URLWithString:url]
+            NSURLSessionDataTask* dataTask = [session dataTaskWithURL:[NSURL URLWithString:feedItem.imageURL]
                                                     completionHandler:^(NSData *data,
                                                                         NSURLResponse *response,
                                                                         NSError *error) {
@@ -59,7 +58,7 @@
                                                                 });
                                                             }
                                                             
-                                                            [[GRGFeedImageCacheController sharedController] addImage:downloadedImage toCacheForImageID:imageID];
+                                                            [[GRGFeedImageCacheController sharedController] addImage:downloadedImage toCacheForImageID:feedItem.imageID];
                                                         }
                                                         
                                                     }];

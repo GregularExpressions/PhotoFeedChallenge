@@ -74,7 +74,7 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
     FeedItem* feedItem = self.tableFeedItems[indexPath.row];
     [cell setTitleText:feedItem.title];
         
-    [self.imageController getImageWithID:feedItem.imageID atURL:feedItem.imageURL forIndexPath:indexPath withCompletion:^(NSError *error, UIImage *image, BOOL fromCache) {
+    [self.imageController getImageFromFeedItem:feedItem forIndexPath:indexPath withCompletion:^(NSError *error, UIImage *image, BOOL fromCache) {
         if (!error) {
             if ([tableView.indexPathsForVisibleRows containsObject:indexPath]) {
                 [cell setPhotoImage:image withAnimation:!fromCache];
