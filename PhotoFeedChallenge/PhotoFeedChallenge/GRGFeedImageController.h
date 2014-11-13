@@ -15,6 +15,6 @@
 - (void) getImageWithID:(NSNumber*)imageID
                   atURL:(NSString*)url
            forIndexPath:(NSIndexPath*)indexPath
-         withCompletion:(void (^)(NSError* error, UIImage* image))completion;
+         withCompletion:(void (^)(NSError* error, UIImage* image, BOOL fromCache))completion;
 - (void) cancelImageForIndexPath:(NSIndexPath*)indexPath;
 @end

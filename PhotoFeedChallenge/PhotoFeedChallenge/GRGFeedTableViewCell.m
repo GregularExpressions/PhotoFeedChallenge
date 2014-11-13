@@ -19,23 +19,25 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self.contentView setBackgroundColor:[UIColor whiteColor]];
+        [self setBackgroundColor:[UIColor colorWithRed:200.0/255.0 green:222.0/255.0 blue:227.0/255.0 alpha:1.0]];
+        [self.contentView setBackgroundColor:[UIColor colorWithRed:200.0/255.0 green:222.0/255.0 blue:227.0/255.0 alpha:1.0]];
+        
         
         self.photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20.0f, [[UIScreen mainScreen] bounds].size.width, 120.0f)];
-        [self.photoImageView setBackgroundColor:[UIColor colorWithWhite:0.9 alpha:1.0]];
-        [self.photoImageView setOpaque:YES];
+        [self.photoImageView setBackgroundColor:[UIColor colorWithRed:200.0/255.0 green:222.0/255.0 blue:227.0/255.0 alpha:1.0]];
+        //[self.photoImageView setOpaque:YES];
         [self.photoImageView setContentMode:UIViewContentModeScaleAspectFill];
         [self.photoImageView setClipsToBounds:YES];
+        [self.photoImageView setAlpha:0];
         [self.contentView addSubview:self.photoImageView];
         
-        CGFloat textInset = 2.0f;
         CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(textInset, 0, screenWidth-textInset, 20.0f)];
-        [self.titleLabel setBackgroundColor:self.contentView.backgroundColor];
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 20.0f)];
+        [self.titleLabel setBackgroundColor:[UIColor whiteColor]];
         [self.titleLabel setOpaque:YES];
         [self.titleLabel setNumberOfLines:0];
         [self.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
-        [self.titleLabel setTextColor:[UIColor blackColor]];
+        [self.titleLabel setTextColor:[UIColor colorWithRed:3.0/255.0 green:22.0/255.0 blue:52.0/255.0 alpha:1.0]];
         [self.titleLabel setFont:[UIFont systemFontOfSize:16.0f]];
         [self.contentView addSubview:self.titleLabel];
     }
@@ -45,6 +47,8 @@
 - (void)prepareForReuse
 {
     [self.photoImageView setImage:nil];
+    [self.photoImageView setAlpha:0];
+    [self.photoImageView setFrame:CGRectMake(0, 20.0f, [[UIScreen mainScreen] bounds].size.width, 120.0f)];
 }
 
 - (void) setTitleText:(NSString*)newText
@@ -52,9 +56,28 @@
     [self.titleLabel setText:newText];
 }
 
-- (void) setPhotoImage:(UIImage*)newPhotoImage
+- (void) setPhotoImage:(UIImage*)newPhotoImage withAnimation:(BOOL)animation
 {
+    
     [self.photoImageView setImage:newPhotoImage];
+    
+    if (animation) {
+        CGRect endFrame = self.photoImageView.frame;
+        CGPoint endCentre = self.photoImageView.center;
+        
+        CGRect startFrame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width/3, endFrame.size.width/3);
+        [self.photoImageView setFrame:startFrame];
+        [self.photoImageView setCenter:endCentre];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.photoImageView setAlpha:1.0];
+            [self.photoImageView setFrame:endFrame];
+        } completion:^(BOOL finished) {
+            
+        }];
+    } else {
+        [self.photoImageView setAlpha:1.0];
+    }
 }
 
 @end

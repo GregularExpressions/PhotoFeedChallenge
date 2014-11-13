@@ -12,10 +12,11 @@
 #import "GRGFeedImageController.h"
 #import "FeedItem.h"
 
-@interface GRGFeedViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface GRGFeedViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (nonatomic,strong) UITableView* feedTableView;
 @property (nonatomic,strong) NSArray* tableFeedItems;
 @property (nonatomic,strong) GRGFeedImageController* imageController;
+@property (nonatomic) CGFloat previousScrollViewYOffset;
 @end
 
 static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
@@ -24,6 +25,8 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"Photo Feed";
     
     self.imageController = [[GRGFeedImageController alloc] init];
     
@@ -70,10 +73,10 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
     FeedItem* feedItem = self.tableFeedItems[indexPath.row];
     [cell setTitleText:feedItem.title];
         
-    [self.imageController getImageWithID:feedItem.imageID atURL:feedItem.imageURL forIndexPath:indexPath withCompletion:^(NSError *error, UIImage *image) {
+    [self.imageController getImageWithID:feedItem.imageID atURL:feedItem.imageURL forIndexPath:indexPath withCompletion:^(NSError *error, UIImage *image, BOOL fromCache) {
         if (!error) {
             if ([tableView.indexPathsForVisibleRows containsObject:indexPath]) {
-                [cell setPhotoImage:image];
+                [cell setPhotoImage:image withAnimation:!fromCache];
             }
         }
     }];
@@ -92,5 +95,66 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark - UINavigationBar Retreat
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGRect frame = self.navigationController.navigationBar.frame;
+    CGFloat size = frame.size.height - 21;
+    CGFloat framePercentageHidden = ((20 - frame.origin.y) / (frame.size.height - 1));
+    CGFloat scrollOffset = scrollView.contentOffset.y;
+    CGFloat scrollDiff = scrollOffset - self.previousScrollViewYOffset;
+    CGFloat scrollHeight = scrollView.frame.size.height;
+    CGFloat scrollContentSizeHeight = scrollView.contentSize.height + scrollView.contentInset.bottom;
+    
+    if (scrollOffset <= -scrollView.contentInset.top) {
+        frame.origin.y = 20;
+    } else if ((scrollOffset + scrollHeight) >= scrollContentSizeHeight) {
+        frame.origin.y = -size;
+    } else {
+        frame.origin.y = MIN(20, MAX(-size, frame.origin.y - scrollDiff));
+    }
+    
+    [self.navigationController.navigationBar setFrame:frame];
+    [self updateBarAlpha:(1 - framePercentageHidden)];
+    self.previousScrollViewYOffset = scrollOffset;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self stoppedScrolling];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
+                  willDecelerate:(BOOL)decelerate
+{
+    if (!decelerate) {
+        [self stoppedScrolling];
+    }
+}
+
+- (void)stoppedScrolling
+{
+    CGRect frame = self.navigationController.navigationBar.frame;
+    if (frame.origin.y < 20) {
+        [self animateNavBarTo:-(frame.size.height - 21)];
+    }
+}
+
+- (void)updateBarAlpha:(CGFloat)alpha
+{
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[[UIColor whiteColor] colorWithAlphaComponent:alpha]}];
+}
+
+- (void)animateNavBarTo:(CGFloat)y
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect frame = self.navigationController.navigationBar.frame;
+        CGFloat alpha = (frame.origin.y >= y ? 0 : 1);
+        frame.origin.y = y;
+        [self.navigationController.navigationBar setFrame:frame];
+        [self updateBarAlpha:alpha];
+    }];
+}
 
 @end

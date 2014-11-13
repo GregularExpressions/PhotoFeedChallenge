@@ -28,7 +28,7 @@
 - (void) getImageWithID:(NSNumber*)imageID
                   atURL:(NSString*)url
            forIndexPath:(NSIndexPath*)indexPath
-         withCompletion:(void (^)(NSError* error, UIImage* image))completion
+         withCompletion:(void (^)(NSError* error, UIImage* image, BOOL fromCache))completion
 {
     dispatch_async(self.imageQueue, ^{
         
@@ -38,7 +38,7 @@
         if (cachedImage) {
             if (completion) {
                 dispatch_async (dispatch_get_main_queue(), ^{
-                    completion(nil,cachedImage);
+                    completion(nil,cachedImage,YES);
                 });
             }
         } else {
@@ -55,7 +55,7 @@
                                                             
                                                             if (completion) {
                                                                 dispatch_async (dispatch_get_main_queue(), ^{
-                                                                    completion(nil,downloadedImage);
+                                                                    completion(nil,downloadedImage,NO);
                                                                 });
                                                             }
                                                             

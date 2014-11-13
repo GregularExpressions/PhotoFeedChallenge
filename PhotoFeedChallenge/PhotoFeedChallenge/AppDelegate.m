@@ -16,11 +16,14 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.feedViewController = [[GRGFeedViewController alloc] init];
-    self.window.rootViewController = self.feedViewController;
+    UINavigationController* feedNavController = [[UINavigationController alloc] initWithRootViewController:self.feedViewController];
+    feedNavController.navigationBar.barTintColor = [UIColor colorWithRed:153.0/255.0 green:178.0/255.0 blue:183.0/255.0 alpha:1.0];
+    [feedNavController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.window.rootViewController = feedNavController;
     [self.window makeKeyAndVisible];
-
     return YES;
 }
 

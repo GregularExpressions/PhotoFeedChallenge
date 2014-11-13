@@ -11,5 +11,5 @@
 static CGFloat kFeedTableViewCellHeight = 140.0f;
 @interface GRGFeedTableViewCell : UITableViewCell
 - (void) setTitleText:(NSString*)newText;
-- (void) setPhotoImage:(UIImage*)newPhotoImage;
+- (void) setPhotoImage:(UIImage*)newPhotoImage withAnimation:(BOOL)animation;
 @end
