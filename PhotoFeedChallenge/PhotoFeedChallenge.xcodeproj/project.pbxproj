@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		371587251A15528B003B4EFB /* FeedImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 371587241A15528B003B4EFB /* FeedImageItem.m */; };
 		37187DD11A1293D800B02AE9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37187DD01A1293D800B02AE9 /* UIKit.framework */; };
 		37187DD91A12A34000B02AE9 /* GRGFeedImageCacheController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37187DD81A12A34000B02AE9 /* GRGFeedImageCacheController.m */; };
 		375376851A11741E00D1CDF1 /* GRGFeedImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375376841A11741E00D1CDF1 /* GRGFeedImageController.m */; };
@@ -24,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		371587231A15528B003B4EFB /* FeedImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedImageItem.h; sourceTree = "<group>"; };
+		371587241A15528B003B4EFB /* FeedImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedImageItem.m; sourceTree = "<group>"; };
 		37187DD01A1293D800B02AE9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		37187DD21A12941A00B02AE9 /* PhotoFeedChallenge-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PhotoFeedChallenge-Prefix.pch"; sourceTree = "<group>"; };
 		37187DD71A12A34000B02AE9 /* GRGFeedImageCacheController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGFeedImageCacheController.h; sourceTree = "<group>"; };
@@ -152,6 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				37DDC1131A0E6E6D00864B21 /* PhotoFeedChallenge.xcdatamodeld */,
+				371587231A15528B003B4EFB /* FeedImageItem.h */,
+				371587241A15528B003B4EFB /* FeedImageItem.m */,
 				37DDC1371A0E728000864B21 /* FeedItem.h */,
 				37DDC1381A0E728000864B21 /* FeedItem.m */,
 			);
@@ -248,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				371587251A15528B003B4EFB /* FeedImageItem.m in Sources */,
 				37DDC1121A0E6E6D00864B21 /* AppDelegate.m in Sources */,
 				37DDC13D1A0E73EF00864B21 /* GRGCoreDataController.m in Sources */,
 				37DDC1391A0E728000864B21 /* FeedItem.m in Sources */,

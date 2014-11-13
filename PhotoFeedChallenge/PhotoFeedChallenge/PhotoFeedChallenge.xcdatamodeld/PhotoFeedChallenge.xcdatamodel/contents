@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14B17" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14B23" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="FeedImageItem" representedClassName="FeedImageItem" syncable="YES">
+        <attribute name="imageFileSize" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="imageID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="imageWidth" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="FeedItem" representedClassName="FeedItem" syncable="YES">
         <attribute name="feedID" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="imageID" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -10,5 +16,6 @@
     </entity>
     <elements>
         <element name="FeedItem" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="FeedImageItem" positionX="-63" positionY="27" width="128" height="105"/>
     </elements>
 </model>

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "FeedItem.h"
+#import "FeedImageItem.h"
 
 @interface GRGCoreDataController : NSObject
 @property (nonatomic, retain) NSManagedObjectModel *managedObjectModel;
@@ -29,4 +30,6 @@
 - (BOOL) save:(NSError**)saveError onContext:(NSManagedObjectContext*)context isBackgroundContext:(BOOL)background;
 #pragma mark - ManagedObjects:
 - (FeedItem*) getNewFeedItemOnManagedObjectContext:(NSManagedObjectContext*)context;
+- (FeedImageItem*) getNewFeedImageItemOnManagedObjectContext:(NSManagedObjectContext*)context;
+- (NSArray*) getAllFeedImageItemsOnManagedObjectContext:(NSManagedObjectContext*)context;
 @end

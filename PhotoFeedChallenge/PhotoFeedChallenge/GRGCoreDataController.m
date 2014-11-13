@@ -31,6 +31,31 @@
     return newFeedItem;
 }
 
+#pragma mark - FeedImageItem
+- (FeedImageItem*) getNewFeedImageItemOnManagedObjectContext:(NSManagedObjectContext*)context
+{
+    FeedImageItem* newFeedImageItem = [NSEntityDescription insertNewObjectForEntityForName:@"FeedImageItem" inManagedObjectContext:context];
+    return newFeedImageItem;
+}
+
+- (NSArray*) getAllFeedImageItemsOnManagedObjectContext:(NSManagedObjectContext*)context
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"FeedImageItem"
+                                              inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"imageID" ascending:YES]]];
+    
+    NSError* fetchError;
+    NSArray *array = [context executeFetchRequest:fetchRequest error:&fetchError];
+    if (fetchError) {
+        NSLog(@"%s : %@",__PRETTY_FUNCTION__,fetchError);
+    }
+    
+    return array;
+}
+
 #pragma mark - Core Data
 - (NSManagedObjectContext*) getNewBackgroundManagedObjectContext
 {
