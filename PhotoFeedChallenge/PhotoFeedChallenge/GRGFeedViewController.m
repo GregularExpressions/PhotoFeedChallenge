@@ -14,6 +14,7 @@
 
 @interface GRGFeedViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (nonatomic,strong) UITableView* feedTableView;
+@property (nonatomic,strong) UIActivityIndicatorView* activityView;
 @property (nonatomic,strong) NSArray* tableFeedItems;
 @property (nonatomic,strong) GRGFeedImageController* imageController;
 @property (nonatomic) CGFloat previousScrollViewYOffset;
@@ -28,11 +29,16 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
     [super viewDidLoad];
     
     self.title = @"Photo Feed";
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
     self.imageController = [[GRGFeedImageController alloc] init];
     
-    // Create the TableView we'll show the FeedItems in:
-    self.feedTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+    // Create the TableView we'll show the FeedItems in and push it offscreen:
+    self.feedTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x,
+                                                                       self.view.frame.size.height,
+                                                                       self.view.frame.size.width,
+                                                                       self.view.frame.size.height)
+                                                      style:UITableViewStylePlain];
     self.feedTableView.delegate = self;
     self.feedTableView.dataSource = self;
     [self.feedTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -40,16 +46,32 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
     [self.feedTableView setRowHeight:kFeedTableViewCellHeight];
     [self.view addSubview:self.feedTableView];
     
+    // We introduce an UIActivityIndicatorView for when the webservice takes a few seconds to respond on first launch.
+    // it could certainly be more imaginative:
+    self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [self.activityView setTintColor:self.navigationController.navigationBar.barTintColor];
+    [self.activityView startAnimating];
+    [self.activityView setCenter:self.view.center];
+    [self.view addSubview:self.activityView];
+    
     GRGFeedAPIController* apiController = [[GRGFeedAPIController alloc] init];
     __weak GRGFeedViewController* weakSelf = self;
     [apiController downloadAndStoreFeedItemsWithCompletion:^(NSError *error, NSArray *feedItems) {
         if (!error) {
             weakSelf.tableFeedItems = feedItems;
-            [self.feedTableView reloadData];
+            [weakSelf.feedTableView reloadData];
+            [weakSelf.activityView removeFromSuperview];
+            [UIView animateWithDuration:0.3 animations:^{
+                [weakSelf.feedTableView setFrame:CGRectMake(self.view.frame.origin.x,
+                                                        self.view.frame.origin.y,
+                                                        self.view.frame.size.width,
+                                                        self.view.frame.size.height)];
+            }];
         } else {
             NSLog(@"Error downloading and storing FeedItems: %@",error);
         }
     }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,6 +162,9 @@ static NSString* kFeedCellReuseIdentifier = @"kFeedCellReuseIdentifier";
         
         if ([[NSDate date] timeIntervalSinceDate:self.statsLastTriggeredDate] > 5) {
             self.statsLastTriggeredDate = [NSDate date];
+            
+            // Stats will be generated based on the full size images we have downloaded
+            // thus far, even if that's not all of them we'll continue anyway:
             [GRGFeedAPIController calculateAndOutputStats];
         }
     }
