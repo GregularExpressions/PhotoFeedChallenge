@@ -8,3 +8,5 @@ A demo app created to a potential employer's spec, it features:
 - Grand Central Dispatch
 - Core Data
 - Image Resizing
+
+Full spec in PDF contained in repo.
